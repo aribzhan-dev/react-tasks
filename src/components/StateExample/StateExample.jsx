@@ -3,16 +3,21 @@ import { useEffect, useState } from "react";
 
 
 function StateExample(){
-    const [counter, setCounter] = useState(0);
+    const [seconds, setSeconds] = useState(0);
+        
     useEffect(() => {
-    document.title = `Count: ${counter}`;
-    }, [counter]);
+        const intervalId = setInterval(() => {
+        setSeconds(prev => prev + 1);
+        }, 1000);
+        
+        return () => {
+        clearInterval(intervalId);
+        };
+    }, []);
 
     return (
         <>  
-            <h1>Count: {counter}</h1>
-            <button onClick={() => setCounter(counter + 1)}>To +</button>
-            <button onClick={() => setCounter(counter - 1)}>To --</button>
+            <h1>Proshlo: {seconds}</h1>
         </>
     ) 
 }
